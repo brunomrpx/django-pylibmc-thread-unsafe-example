@@ -1,0 +1,22 @@
+version: "3.9"
+
+networks:
+  sample-network:
+    name: sample-network
+
+services:
+  sample-app:
+    container_name: sample-app
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    networks:
+      - sample-network
+
+  sample-memcached:
+    container_name: sample-memcached
+    image: memcached:latest
+    networks:
+      - sample-network
